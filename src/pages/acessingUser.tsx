@@ -2,7 +2,6 @@ import { withIronSessionSsr } from "iron-session/next";
 
 export default function AcessingUser({ user }: any) {
 
-    console.log(user);
     return (
         <div>
             email: {user?.email ? user.email : 'Não tem email'}
@@ -12,7 +11,7 @@ export default function AcessingUser({ user }: any) {
 }
 
 export const getServerSideProps = withIronSessionSsr(async function ({ req, res }: any) {
-    const user = req.session.user
+    const user = req.session
 
     if (user === undefined) {
         res.setHeader('location', '/login');

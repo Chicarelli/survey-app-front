@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IronSessionOptions } from 'iron-session';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { surveyAppRequest } from '../../services/SurveyAppRequest';
 
 declare module 'iron-session' {
     interface IronSessionData {
@@ -24,11 +25,11 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     const { email, password } = req.body;
 
     try {
-        const token = axios.post('http://localhost:8000/auth/login', {
+        const token = await surveyAppRequest.login({
             email, password
         });
 
-        const user = { isLoggedIn: true, email } ;
+        const user = { isLoggedIn: true, email, token } ;
         req.session.user = user;
         await req.session.save()
 

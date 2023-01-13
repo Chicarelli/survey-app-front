@@ -6,10 +6,9 @@ export default function useUser({
   redirectTo = '',
   redirectIfFound = false,
 } = {}) {
-  const { data: user, mutate: mutateUser } = useSWR<{data: {email: string, isLoggedIn: boolean}}>('/api/user')
+  const { data: user, mutate: mutateUser } = useSWR<{data: {email: string, isLoggedIn: boolean}}>('/api/login')
 
   useEffect(() => {
-    console.log({user, mutateUser});
     // if no redirect needed, just return (example: already on /dashboard)
     // if user data not yet there (fetch in progress, logged in or not) then don't do anything yet
     if (!redirectTo || !user) return
