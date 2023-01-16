@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IronSessionOptions } from 'iron-session';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { withSessionRoute } from '../../lib/sessionWrapper';
 import { surveyAppRequest } from '../../services/SurveyAppRequest';
 
 declare module 'iron-session' {
@@ -10,14 +11,6 @@ declare module 'iron-session' {
             isLoggedIn: boolean,
             email: string
         }
-    }
-}
-
-const sessionOptions: IronSessionOptions = {
-    password: 'ASOIJ1O23JOI1J90ASDJ12KLNASLDNON12839GS9BNAKLSDN',
-    cookieName: 'iron-session/examples/next.js',
-    cookieOptions: {
-        secure: false
     }
 }
 
@@ -40,4 +33,4 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     }
 }
 
-export default withIronSessionApiRoute(loginRoute, sessionOptions);
+export default withSessionRoute(loginRoute);

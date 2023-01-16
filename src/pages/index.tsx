@@ -1,14 +1,8 @@
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
 import { useTheme } from '@mui/material/styles';
-import styles from '../styles/index.module.scss';
-import useUser from '../lib/useUser';
-import { withIronSessionSsr } from 'iron-session/next';
 
 export default function Home({ user }: any) {
   const theme = useTheme();
-
-  console.log(user);
 
   return (
     <>
@@ -26,25 +20,3 @@ export default function Home({ user }: any) {
     </>
   )
 }
-
-export const getServerSideProps = withIronSessionSsr(async function ({ req, res }: any) {
-  const { user } = req.session;
-
-  if (!user) {
-    return {
-      props: { user: undefined }
-    }
-  }
-
-  return {
-    props: { user }
-  }
-}, {
-  password: 'ASOIJ1O23JOI1J90ASDJ12KLNASLDNON12839GS9BNAKLSDN',
-  cookieName: 'iron-session/examples/next.js',
-  cookieOptions: {
-    secure: false
-  }
-})
-
-

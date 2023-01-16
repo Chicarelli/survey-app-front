@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import useUser from "../lib/useUser";
+import useUser from "../../lib/useUser";
 
 export default function Login() {
     const { mutateUser } = useUser({
