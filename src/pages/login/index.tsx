@@ -30,14 +30,17 @@ export default function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+            <h1 className="text-3xl underline">hello</h1>
+            <form onSubmit={handleSubmit}>
 
-            <input type="email" name="email" />
+                <input type="email" name="email" />
 
-            <input type="password" />
+                <input type="password" />
 
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </>
     )
 
 }

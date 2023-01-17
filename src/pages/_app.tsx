@@ -4,6 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import Head from 'next/head';
 import createEmotionCache from '../config/createEmotionCache';
 import theme from '../config/theme';
+import "../styles/globals.css";
 
 const clientSideEmotionCache = createEmotionCache();
 

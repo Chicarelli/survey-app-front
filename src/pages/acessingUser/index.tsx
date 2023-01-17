@@ -1,4 +1,4 @@
-import { withSessionSsr } from "../lib/sessionWrapper";
+import { withSessionSsr } from "../../lib/sessionWrapper";
 
 export default function AcessingUser({ user }: any) {
 
