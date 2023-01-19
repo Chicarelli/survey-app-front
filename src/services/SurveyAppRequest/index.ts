@@ -8,16 +8,18 @@ class SurveyAppRequest extends AxiosRequest {
         super(baseURL)
     }
     
-    async login({email, password}: any): Promise<String> {
+    async login({email, password}: any): Promise<string> {
         return (await this.axiosInstance.post(this.LOGIN_URL, {email, password})).data;
     }
 
-    async createUser({name, email, password}: any): Promise<void> {
-        return (await this.axiosInstance.post(this.CREATE_USER_URL, {
+    async createUser({name, email, password}: any): Promise<any> {
+        const data = await this.axiosInstance.post(this.CREATE_USER_URL, {
             name,
             email,
             password
-        }));
+        });
+
+        return data;
     }
 }
 

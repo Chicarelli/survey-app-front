@@ -1,5 +1,7 @@
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
+import { withSessionRoute } from "../../lib/sessionWrapper";
+import { CreateSession } from "../../services/SessionControl/SurveySession";
 import { surveyAppRequest } from "../../services/SurveyAppRequest";
 
 async function createAccountRoute(req: NextApiRequest, res: NextApiResponse) {
@@ -10,17 +12,21 @@ async function createAccountRoute(req: NextApiRequest, res: NextApiResponse) {
             email, password, name
         });
 
-        setTimeout(async () => {
-            const user = await axios.post('http://localhost:3000/api/login', {email, password});
-            console.log({user});
-    
-            res.json(user.data);
-        }, 1000)
+        const token = await surveyAppRequest.login({
+            email, password
+        });
 
+        await CreateSession({isLoggedIn: true, email, token, req});
+
+        res.json({
+            isLoggedIn: true,
+            email,
+            token
+        })
     }
     catch (error) {
         res.status(400).json(error);
     }
 }
 
-export default createAccountRoute;
+export default withSessionRoute(createAccountRoute);
