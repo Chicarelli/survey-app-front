@@ -1,6 +1,13 @@
+import axios from "axios";
 import { FormFields, UserFormComponent } from "../../components/UserFormComponent"
+import useUser from "../../lib/useUser";
 
 export default function NewAccount() {
+    const { mutateUser } = useUser({
+        redirectTo: '/',
+        redirectIfFound: true
+    });
+
     const fields: Array<FormFields> = [
         {
             type: 'text',
@@ -27,6 +34,14 @@ export default function NewAccount() {
         const name = event.target.name.value;
 
         console.log({ email, password, name });
+
+        try {
+            mutateUser(
+                await axios.post('/api/createAccount', { name, email, password })
+            )
+        } catch (error: any) {
+            alert('Deu ruim');
+        }
 
     }
 

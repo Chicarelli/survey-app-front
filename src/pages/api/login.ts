@@ -1,6 +1,3 @@
-import axios from 'axios';
-import { IronSessionOptions } from 'iron-session';
-import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { withSessionRoute } from '../../lib/sessionWrapper';
 import { surveyAppRequest } from '../../services/SurveyAppRequest';
@@ -18,11 +15,14 @@ async function loginRoute(req: NextApiRequest, res: NextApiResponse) {
     const { email, password } = req.body;
 
     try {
+        console.log('here');
         const token = await surveyAppRequest.login({
             email, password
         });
+        console.log('here2');
 
         const user = { isLoggedIn: true, email, token } ;
+        console.log('here3');
         req.session.user = user;
         await req.session.save()
 
